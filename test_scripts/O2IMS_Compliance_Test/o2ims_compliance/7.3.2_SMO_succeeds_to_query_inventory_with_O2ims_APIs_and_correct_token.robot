@@ -15,6 +15,8 @@ ${globalLocationId}         ${ocloud.oran_o2_app.g_location_id}
 
 ${ORAN_O2IMS_ENDPOINT}  ${ocloud.oran_o2_app.api.protocol}://${ORAN_HOST_EXTERNAL_IP}:${ORAN_SERVICE_NODE_PORT}
 
+${RESOURCETYPE_NAME}        ${ocloud.oran_o2_app.resourcetype_name}
+
 *** Test Cases ***
 s1, query o-cloud detail
     [documentation]  This test case verifies Query OCloud Detail
@@ -25,7 +27,7 @@ s1, query o-cloud detail
     # Set Headers     {"Authorization": "Bearer ${SMO_TOKEN_DATA}"}
     # Clear Expectations
     Expect Response Body        ${CURDIR}/schemas/ocloud_properties.json
-    ${res}     GET   ${ORAN_O2IMS_ENDPOINT}/o2ims-infrastructureInventory/v1/
+    ${res}     GET   ${ORAN_O2IMS_ENDPOINT}/o2ims-infrastructureInventory/v1
     # Output Schema   response body   ${CURDIR}/schemas/.output/ocloud_properties.json
     Clear Expectations
     log      ${res}   level=DEBUG
@@ -70,7 +72,7 @@ s3, query resource type list with filters
     [tags]  ORAN_Compliance     ORAN_O2     ORAN_O2IMS    ORAN_O2IMS_Inventory
     # Clear Expectations
     Expect Response Body        ${CURDIR}/schemas/resourceTypes_properties.json
-    ${res}     GET   ${ORAN_O2IMS_ENDPOINT}/o2ims-infrastructureInventory/v1/resourceTypes?filter=(eq,name,pserver)
+    ${res}     GET   ${ORAN_O2IMS_ENDPOINT}/o2ims-infrastructureInventory/v1/resourceTypes?filter=(eq,name,${RESOURCETYPE_NAME})
     Clear Expectations
     log      ${res}   level=DEBUG
     Integer     response status    200
@@ -98,7 +100,7 @@ s5, query Resource Type detail
     [documentation]  This test case verifies Query OCloud resourceTypes detail
     [tags]  ORAN_Compliance     ORAN_O2     ORAN_O2IMS    ORAN_O2IMS_Inventory
     Clear Expectations
-    GET   ${ORAN_O2IMS_ENDPOINT}/o2ims-infrastructureInventory/v1/resourceTypes?filter=(eq,name,pserver)
+    GET   ${ORAN_O2IMS_ENDPOINT}/o2ims-infrastructureInventory/v1/resourceTypes?filter=(eq,name,${RESOURCETYPE_NAME})
     ${resourceTypeId}      output   $[0].resourceTypeId
     # Clear Expectations
     Expect Response Body        ${CURDIR}/schemas/resourceType_properties.json
@@ -220,7 +222,7 @@ s11, query Resource list of a Resource Pool with filter
     [documentation]  This test case verifies Query OCloud Resource list with filter
     [tags]  ORAN_Compliance     ORAN_O2     ORAN_O2IMS    ORAN_O2IMS_Inventory
     Clear Expectations
-    GET   ${ORAN_O2IMS_ENDPOINT}/o2ims-infrastructureInventory/v1/resourceTypes?filter=(eq,name,pserver)
+    GET   ${ORAN_O2IMS_ENDPOINT}/o2ims-infrastructureInventory/v1/resourceTypes?filter=(eq,name,${RESOURCETYPE_NAME})
     ${resourceTypeId}      output   $[0].resourceTypeId
     Clear Expectations
     GET   ${ORAN_O2IMS_ENDPOINT}/o2ims-infrastructureInventory/v1/resourcePools
@@ -244,7 +246,7 @@ s12, query Resource list of a Resource Pool with selector
     [documentation]  This test case verifies query Resource list of a Resource Pool with selector
     [tags]  ORAN_Compliance     ORAN_O2     ORAN_O2IMS    ORAN_O2IMS_Inventory
     Clear Expectations
-    GET   ${ORAN_O2IMS_ENDPOINT}/o2ims-infrastructureInventory/v1/resourceTypes?filter=(eq,name,pserver)
+    GET   ${ORAN_O2IMS_ENDPOINT}/o2ims-infrastructureInventory/v1/resourceTypes?filter=(eq,name,${RESOURCETYPE_NAME})
     ${resourceTypeId}      output   $[0].resourceTypeId
     Clear Expectations
     GET   ${ORAN_O2IMS_ENDPOINT}/o2ims-infrastructureInventory/v1/resourcePools
@@ -264,10 +266,10 @@ s12, query Resource list of a Resource Pool with selector
     END
 
 s13, query Resource detail
-    [documentation]  This test case verifies Query OCloud Resource Detail of pserver
+    [documentation]  This test case verifies Query OCloud Resource Detail of ${RESOURCETYPE_NAME} 
     [tags]  ORAN_Compliance     ORAN_O2     ORAN_O2IMS    ORAN_O2IMS_Inventory
     Clear Expectations
-    GET   ${ORAN_O2IMS_ENDPOINT}/o2ims-infrastructureInventory/v1/resourceTypes?filter=(eq,name,pserver)
+    GET   ${ORAN_O2IMS_ENDPOINT}/o2ims-infrastructureInventory/v1/resourceTypes?filter=(eq,name,${RESOURCETYPE_NAME})
     ${resourceTypeId}      output   $[0].resourceTypeId
     GET   ${ORAN_O2IMS_ENDPOINT}/o2ims-infrastructureInventory/v1/resourcePools
     @{resourcePools}     output  $
