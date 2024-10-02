@@ -97,7 +97,7 @@ s2, Operate Ocloud with unsupported method
 
     Clear Expectations
     # Expect Response Body        ${CURDIR}/schemas/unsupported_method_properties.json
-    ${res}     POST   ${ORAN_O2IMS_ENDPOINT}/o2ims-infrastructureInventory/v1/
+    ${res}     POST   ${ORAN_O2IMS_ENDPOINT}/o2ims-infrastructureInventory/v1
     # Output Schema   response body   ${CURDIR}/schemas/.output/unsupported_method_properties.json
     # Clear Expectations
     log      ${res}   level=DEBUG
@@ -106,19 +106,19 @@ s2, Operate Ocloud with unsupported method
 
     # ${res}     PUT   ${ORAN_O2IMS_ENDPOINT}/o2ims-infrastructureInventory/v1
 
-    ${res}     PUT   ${ORAN_O2IMS_ENDPOINT}/o2ims-infrastructureInventory/v1/
+    ${res}     PUT   ${ORAN_O2IMS_ENDPOINT}/o2ims-infrastructureInventory/v1
     # Clear Expectations
     log      ${res}   level=DEBUG
     Integer  response status    405
     Object   response body
 
-    ${res}     PATCH   ${ORAN_O2IMS_ENDPOINT}/o2ims-infrastructureInventory/v1/
+    ${res}     PATCH   ${ORAN_O2IMS_ENDPOINT}/o2ims-infrastructureInventory/v1
     # Clear Expectations
     log      ${res}   level=DEBUG
     Integer  response status    405
     Object   response body
 
-    ${res}     DELETE   ${ORAN_O2IMS_ENDPOINT}/o2ims-infrastructureInventory/v1/
+    ${res}     DELETE   ${ORAN_O2IMS_ENDPOINT}/o2ims-infrastructureInventory/v1
     # Clear Expectations
     log      ${res}   level=DEBUG
     Integer  response status    405

@@ -26,7 +26,7 @@ s1, Issue API Request without Authorization Bearer Token Header
     Clear Expectations
     # Set Headers     {"Authorization": "Bearer ${SMO_TOKEN_DATA}"}
     Expect Response Body        ${CURDIR}/schemas/client_errors_properties.json
-    ${res}     GET   ${ORAN_O2IMS_ENDPOINT}/o2ims-infrastructureInventory/v1/
+    ${res}     GET   ${ORAN_O2IMS_ENDPOINT}/o2ims-infrastructureInventory/v1
     # Output Schema   response body   ${CURDIR}/schemas/.output/client_errors_properties.json
     # Clear Expectations
     log      ${res}   level=DEBUG
