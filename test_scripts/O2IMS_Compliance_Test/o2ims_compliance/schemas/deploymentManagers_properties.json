@@ -37,8 +37,11 @@
                 "type": "string"
             },
             "extensions": {
-                "type": "null",
-                "default": ""
+                "type": [
+                    "null",
+                    "object"
+                ],
+                "default": null
             }
         },
         "required": [
