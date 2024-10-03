@@ -45,7 +45,6 @@
             "deploymentManagerId",
             "description",
             "name",
-            "profileSupportList",
             "oCloudId",
             "serviceUri"
         ]
