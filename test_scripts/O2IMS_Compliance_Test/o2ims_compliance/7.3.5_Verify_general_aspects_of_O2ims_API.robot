@@ -15,6 +15,7 @@ ${globalLocationId}         ${ocloud.oran_o2_app.g_location_id}
 
 ${ORAN_O2IMS_ENDPOINT}  ${ocloud.oran_o2_app.api.protocol}://${ORAN_HOST_EXTERNAL_IP}:${ORAN_SERVICE_NODE_PORT}
 
+${RESOURCETYPE_NAME}        ${ocloud.oran_o2_app.resourcetype_name}
 
 *** Test Cases ***
 s1, query ApiVersionInformation of o2ims infrastructureInventory services 
@@ -78,7 +79,7 @@ s4, query Resources with filters
 
     Clear Expectations
 
-    GET   ${ORAN_O2IMS_ENDPOINT}/o2ims-infrastructureInventory/v1/resourceTypes?filter=(eq,name,pserver)
+    GET   ${ORAN_O2IMS_ENDPOINT}/o2ims-infrastructureInventory/v1/resourceTypes?filter=(eq,name,${RESOURCETYPE_NAME})
     ${resourceTypeId}      output   $[0].resourceTypeId
 
     GET   ${ORAN_O2IMS_ENDPOINT}/o2ims-infrastructureInventory/v1/resourcePools
