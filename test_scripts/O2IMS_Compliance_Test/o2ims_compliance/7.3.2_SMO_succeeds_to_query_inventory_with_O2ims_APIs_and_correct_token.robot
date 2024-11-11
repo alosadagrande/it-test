@@ -34,7 +34,14 @@ s1, query o-cloud detail
     Integer  response status    200
     # Object   response body
     String   $.globalCloudId    ${GLOBAL_OCLOUD_ID1}
-    String   $.serviceUri       ${ORAN_O2IMS_ENDPOINT}
+    # Sometimes serviceUri does not contain the default port in the json response
+    IF      ${ORAN_SERVICE_NODE_PORT} == 443
+        String   $.serviceUri     ${ORAN_O2IMS_ENDPOINT}  ${ocloud.oran_o2_app.api.protocol}://${ORAN_HOST_EXTERNAL_IP}
+    ELSE IF      ${ORAN_SERVICE_NODE_PORT} == 80
+        String   $.serviceUri     ${ORAN_O2IMS_ENDPOINT}  ${ocloud.oran_o2_app.api.protocol}://${ORAN_HOST_EXTERNAL_IP}
+    ELSE
+        String   $.serviceUri    ${ORAN_O2IMS_ENDPOINT}
+    END
 
     # all_fields
     Expect Response Body        ${CURDIR}/schemas/ocloud_allfields_properties.json
