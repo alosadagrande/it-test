@@ -98,7 +98,8 @@ s4, query Resources with filters
     END
 
     # filter accelerator
-    ${substring1}   input   "Intel Corporation"
+    #${substring1}   input   "Intel Corporation"
+    ${substring1}   input   ${ocloud.oran_o2_app.resource_description_substring}
     ${res}     GET   ${ORAN_O2IMS_ENDPOINT}/o2ims-infrastructureInventory/v1/resourcePools/${resourcePoolId}/resources?filter=(cont,description,${substring1})
     # Clear Expectations
     log      ${res}   level=INFO
@@ -112,13 +113,14 @@ s4, query Resources with filters
 
     # filters combination
     
-    GET   ${ORAN_O2IMS_ENDPOINT}/o2ims-infrastructureInventory/v1/resourceTypes?filter=(eq,name,pserver_ethernet)
+    GET   ${ORAN_O2IMS_ENDPOINT}/o2ims-infrastructureInventory/v1/resourceTypes?filter=(eq,name,${RESOURCETYPE_NAME})
     ${resourceTypeId}      output   $[0].resourceTypeId
 
     GET   ${ORAN_O2IMS_ENDPOINT}/o2ims-infrastructureInventory/v1/resourcePools
     ${resourcePoolId}      output   $[0].resourcePoolId
     # Clear Expectations
-    ${substring1}   input   "Intel Corporation"
+    #${substring1}   input   "Intel Corporation"
+    ${substring1}   input   ${ocloud.oran_o2_app.resource_description_substring}
     # Expect Response Body        ${CURDIR}/schemas/resources_properties.json
     ${res}     GET   ${ORAN_O2IMS_ENDPOINT}/o2ims-infrastructureInventory/v1/resourcePools/${resourcePoolId}/resources     {"filter": "(eq,resourceTypeId,${resourceTypeId});(cont,description,${substring1})"}
     # Clear Expectations
