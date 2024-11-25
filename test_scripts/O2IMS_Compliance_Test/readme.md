@@ -39,6 +39,7 @@ source .robot/bin/activate
 pip3 install --upgrade robotframework
 pip3 install --upgrade RESTinstance
 pip3 install --upgrade robotframework-sshlibrary
+pip3 install --upgrade setuptools
 
 robot --version
 
