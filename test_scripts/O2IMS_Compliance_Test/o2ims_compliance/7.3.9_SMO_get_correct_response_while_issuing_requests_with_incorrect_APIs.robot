@@ -19,7 +19,24 @@ ${ORAN_O2IMS_ENDPOINT}  ${ocloud.oran_o2_app.api.protocol}://${ORAN_HOST_EXTERNA
 
 
 *** Test Cases ***
-s1, Verify query with wrong url got error code.
+
+s1, Verify query with wrong port got error code.
+    [documentation]  Verify query with wrong url got error code.
+    [tags]  ORAN_Compliance     ORAN_O2     ORAN_O2IMS     ORAN_O2IMS_Client_Errors
+
+    ${WRONG_ORAN_SERVICE_NODE_PORT}    input    1
+    Clear Expectations
+    Set Headers     {"Authorization": "Bearer ${SMO_TOKEN_DATA}"}
+    TRY
+       ${res}     GET   ${ocloud.oran_o2_app.api.protocol}://${ORAN_HOST_EXTERNAL_IP}:${WRONG_ORAN_SERVICE_NODE_PORT}/o2ims-infrastructureInventory/v1
+       #log      ${res}   level=DEBUG
+       #Integer  response status    404
+       # Object   response body
+    EXCEPT    ConnectionError: *    type=glob
+       log    PASS:query with wrong port got error code   level=DEBUG
+    END
+
+s2, Verify query with wrong url got error code.
     [documentation]  Verify query with wrong url got error code.
     [tags]  ORAN_Compliance     ORAN_O2     ORAN_O2IMS     ORAN_O2IMS_Client_Errors
 
@@ -30,7 +47,7 @@ s1, Verify query with wrong url got error code.
     Integer  response status    404
     # Object   response body
 
-s2, Verify query with wrong api version got error code.
+s3, Verify query with wrong api version got error code.
     [documentation]  Verify query with wrong api version got error code.
     [tags]  ORAN_Compliance     ORAN_O2     ORAN_O2IMS     ORAN_O2IMS_Client_Errors
 
@@ -43,7 +60,7 @@ s2, Verify query with wrong api version got error code.
     Integer  response status    404
     # Object   response body
 
-s3, Verify query with wrong deploymentManagersID got error code.
+s4, Verify query with wrong deploymentManagersID got error code.
     [documentation]  Verify query with wrong deploymentManagersID got error code.
     [tags]  ORAN_Compliance     ORAN_O2     ORAN_O2IMS     ORAN_O2IMS_Client_Errors
 
