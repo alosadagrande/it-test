@@ -1,0 +1,37 @@
+#olcoud ssh info
+ocloud:
+  ssh:
+    host: REDACTED
+    port: 22
+    username: root
+    password: REDACTED
+    openrc: /etc/platform/openrc
+  #oran_o2_ims_info 
+  oran_o2_app:
+    g_location_id: rdu3
+    g_ocloud_id: 64120487-04a8-4751-84d1-891478b2a0b3
+    smo_token_data: REDACTED 
+    g_ocloud_name: sno-worker-01 # name of one of the managedcluster. Required to execute some tests
+    resourcetype_name: node_80_cores_amd64
+    resource_description_substring: snonode
+    api:
+      host: o2ims.apps.hub0.inbound-int.se-lab.eng.rdu2.dc.redhat.com
+      node_port: 443 
+      protocol: https
+  oran_o2_notification:
+    endpoint_uri: http://localhost:9043/api/ocloudNotifications/v2/dummy
+    resource_address: /cluster/node/snonode.sno-worker-01.inbound-int.se-lab.eng.rdu2.dc.redhat.com/sync/sync-status/os-clock-sync-state
+    publisher_endpoint:   http://ptp-event-publisher-service-snonode-openshift-ptp.apps.sno-worker-01.inbound-int.se-lab.eng.rdu2.dc.redhat.com
+#smo mock server ip and callback endpoints
+smo:
+  service:
+    protocol: https
+    host: 10.6.85.1
+    port: 1080
+    verify_endpoint: /mockserver/verify
+  ocloud_observer:
+    path: /mock_smo/v1/ocloud_observer
+  o2ims_inventory_observer:
+    path: /mock_smo/v1/o2ims_inventory_observer
+  o2ims_alarm_observer:
+    path: /mock_smo/v1/o2ims_alarm_observer
