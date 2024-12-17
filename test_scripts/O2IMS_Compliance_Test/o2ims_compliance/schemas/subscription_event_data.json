@@ -1,0 +1,56 @@
+{
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string"
+        },
+        "type": {
+            "type": "string"
+        },
+        "source": { 
+            "type": "string"
+        },
+        "specversion": {
+            "type": "string"
+        },
+        "time": {
+            "type": "string"
+        },
+        "data": {
+            "type": "object",
+            "properties": {
+                "version": {
+                    "type": "string"
+                },
+                "values": { 
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "data_type": {
+                                "type": "string"
+                             },
+                            "ResourceAddress": {
+                                "type": "string"
+                             },
+                            "value_type": {
+                                "type": "string"
+                             },
+                            "value": {
+                                "type": "string"
+                             }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "required": [
+        "id",
+        "type",
+        "source",
+        "specversion",
+        "time",
+        "data"
+    ]
+}
